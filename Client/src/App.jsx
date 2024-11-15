@@ -30,7 +30,9 @@ function App() {
       const response = await axios.get(
         `${base_URL}?key=${API_KEY}&q=${city}&aqi=no`
       );
-      const condition = response.data.current.condition.text;
+      const conditionApi = response.data.current.condition.text;
+      const condition = conditionApi.join(" ");
+      console.log(condition);
       setWeatherCondition(condition);
       const weatherTypeFromApi = weatherTypeMapping[condition];
       setWeatherType(weatherTypeFromApi);
