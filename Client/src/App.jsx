@@ -31,22 +31,18 @@ function App() {
         `${base_URL}?key=${API_KEY}&q=${city}&aqi=no`
       );
       const condition = response.data.current.condition.text;
-      // const condition = conditionApi.join(" ");
-      console.log(condition);
+
       setWeatherCondition(condition);
       const weatherTypeFromApi = weatherTypeMapping[condition];
       setWeatherType(weatherTypeFromApi);
-      console.log(pokemons);
 
       const filteredByType = pokemons.filter((pokemon) => {
-        console.log(pokemon.type);
-        console.log(weatherTypeFromApi.toLowerCase());
         return pokemon.type.includes(weatherTypeFromApi.toLowerCase());
       });
 
       // An empty array to store the pokemon images
       const imgUrls = [];
-      console.log(filteredByType);
+
       // Loop over the filtered pokemon
       filteredByType.forEach((pokemon) => {
         // Call the function below, which gives us the imgUrl, but it's a promise
@@ -58,11 +54,9 @@ function App() {
 
       // Wait for all the promises to finish - all the URLS
       const result = await Promise.all(imgUrls);
-      console.log(imgUrls);
 
       // Push all the URLS into state
       setPokemonPhotos(result);
-      console.log(result);
     } catch {
       console.log("error");
     }
@@ -92,7 +86,6 @@ function App() {
     event.preventDefault();
 
     const city = event.target.city.value;
-    console.log(city);
     fetchWeather(city);
     return;
   };
